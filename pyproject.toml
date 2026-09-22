@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-chat-room"
+version = "0.1.0"
+description = "Desktop-first multi-agent AI group chat"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "uvicorn[standard]>=0.30,<1",
+  "httpx>=0.27,<1",
+  "pydantic-settings>=2.6,<3",
+  "python-dotenv>=1.0,<2",
+  "sqlalchemy>=2.0,<3",
+  "greenlet>=3.1,<4",
+  "aiosqlite>=0.20,<1",
+  "alembic>=1.14,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.24,<1",
+  "pytest-cov>=6,<7",
+  "ruff>=0.8,<1",
+]
+
+[tool.setuptools]
+package-dir = {"" = "backend"}
+
+[tool.setuptools.packages.find]
+where = ["backend"]
+
+[tool.pytest.ini_options]
+pythonpath = ["backend"]
+asyncio_mode = "auto"
+testpaths = ["backend/tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+ignore = ["B008"]
